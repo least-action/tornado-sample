@@ -3,16 +3,16 @@ import tornado.web
 import logging
 import json
 
-
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world")
+from handlers.base_handlers import HomeHandler, PingHandler
 
 
 def make_app():
-    return tornado.web.Application([
-        (r"/", MainHandler),
-    ])
+    handlers = [
+        (r"/", HomeHandler),
+        (r"/ping", PingHandler)
+    ]
+
+    return tornado.web.Application(handlers=handlers)
 
 
 if __name__ == "__main__":
