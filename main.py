@@ -5,13 +5,17 @@ import time
 import json
 
 from handlers.base_handlers import HomeHandler, PingHandler
+from apps.tornado_docs.handlers import WebFrameworkHandlerFactory
 
 
 def make_app():
-    handlers = [
+    base_handlers = [
         (r"/", HomeHandler),
         (r"/ping", PingHandler)
     ]
+
+    handlers = base_handlers
+    # handlers.append(WebFrameworkHandlerFactory.get_handlers())
 
     return tornado.web.Application(handlers=handlers)
 
