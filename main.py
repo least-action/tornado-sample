@@ -15,7 +15,7 @@ def make_app():
     ]
 
     handlers = base_handlers
-    # handlers.append(WebFrameworkHandlerFactory.get_handlers())
+    handlers.extend(WebFrameworkHandlerFactory.get_handlers())
 
     return tornado.web.Application(handlers=handlers)
 

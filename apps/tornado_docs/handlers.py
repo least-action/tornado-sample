@@ -6,11 +6,10 @@ import tornado.web
 class WebFrameworkHandlerFactory:
     @staticmethod
     def get_handlers():
-        handlers = [
-            (r"/tutorials/webframework($|\/.*)", _WebFrameworkHandler)
+        return [
+            (r"/tutorials/webframework", _WebFrameworkHandler),
+            (r"/tutorials/webframework/initialize", _InitializeHandler, dict(init='initialized_value'))
         ]
-
-        return handlers
 
 
 class _BaseWebFrameworkHandler(tornado.web.RequestHandler):
@@ -20,4 +19,14 @@ class _BaseWebFrameworkHandler(tornado.web.RequestHandler):
 
 class _WebFrameworkHandler(_BaseWebFrameworkHandler):
     def get(self):
-        self.write('web framework')
+        self.write('tutorial - web framework')
+
+
+class _InitializeHandler(_BaseWebFrameworkHandler):
+    def initialize(self, init):
+        self.init = init
+
+    def get(self):
+        self.write(self.init)
+
+
