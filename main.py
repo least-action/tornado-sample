@@ -6,6 +6,7 @@ import json
 
 from handlers.base_handlers import HomeHandler, PingHandler
 from apps.tornado_docs.handlers import WebFrameworkHandlerFactory
+from apps.async_sample.handlers import AsyncSampleHandlerFactory
 
 
 def make_app():
@@ -16,6 +17,7 @@ def make_app():
 
     handlers = base_handlers
     handlers.extend(WebFrameworkHandlerFactory.get_handlers())
+    handlers.extend(AsyncSampleHandlerFactory.get_handlers())
 
     return tornado.web.Application(handlers=handlers)
 
